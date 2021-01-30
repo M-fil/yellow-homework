@@ -1,0 +1,61 @@
+@font-face {
+  font-family: SFUIText;
+  src: local(SFUIText-Regular),
+    url("../../assets/fonts/SFUIText-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: SFUIText;
+  src: local(SFUIText-Medium),
+    url("../../assets/fonts/SFUIText-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: SFUIText;
+  src: local(SFUIText-Bold),
+    url("../../assets/fonts/SFUIText-Semibold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@mixin Text-Style-4 {
+  font-family: SFUIText;
+  font-size: 3.6rem;
+  font-weight: bold;
+  text-align: center;
+}
+@mixin Text-Style-6 {
+  font-family: SFUIText;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+@mixin Text-Style-7 {
+  font-family: SFUIText;
+  font-size: 1.6rem;
+}
+@mixin Text-Style-3 {
+  font-family: SFUIText;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-align: center;
+}
+@mixin Text-Style-2 {
+  font-family: SFUIText;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+@mixin Text-Style {
+  font-family: SFUIText;
+  font-size: 1.4rem;
+  line-height: 1.71;
+}
+@mixin Text-Style-5 {
+  font-family: SFUIText;
+  font-size: 1.3rem;
+  text-align: center;
+}

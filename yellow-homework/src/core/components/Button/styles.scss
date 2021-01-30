@@ -1,0 +1,16 @@
+@import "../../../core/styles/fonts.scss";
+$default-border: solid 3px #ffffff;
+$text-color: #ffffff;
+
+.default-button {
+  @include Text-Style-6;
+  cursor: pointer;
+
+  min-width: 100px;
+  border-radius: 36px;
+  border: $default-border;
+  color: $text-color;
+
+  outline: none;
+  background: transparent;
+}

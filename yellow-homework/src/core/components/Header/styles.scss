@@ -1,0 +1,29 @@
+$main-background-color: #7ed321;
+$main-text-color: #ffffff;
+$logo-image-width: 44px;
+$logo-image-height: 55px;
+
+.header {
+  display: flex;
+  align-items: center;
+
+  padding: 30px 37px;
+  background-color: $main-background-color;
+
+  &__logo-image {
+    width: $logo-image-width;
+    height: $logo-image-height;
+
+    margin-right: 20px;
+  }
+
+  &__logo-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__logo-title {
+    color: $main-text-color;
+  }
+}

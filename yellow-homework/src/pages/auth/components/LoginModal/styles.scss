@@ -1,0 +1,32 @@
+$default-logo-img-width: 160px;
+$default-logo-img-height: 150px;
+$default-modal-width: 500px;
+$default-modal-height: 380px;
+$default-modal-background: #e990f9;
+
+.login-modal {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 75px 170px 35px 170px;
+
+    border-radius: 44px;
+    background-color: $default-modal-background;
+  }
+
+  &__image {
+    width: $default-logo-img-width;
+    height: $default-logo-img-height;
+
+    margin-bottom: 55px;
+  }
+
+  &__auth-button {
+    font-size: 1.8rem;
+    line-height: 2rem;
+    padding: 20px 34px 19px;
+  }
+}
