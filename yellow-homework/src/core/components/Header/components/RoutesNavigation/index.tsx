@@ -1,5 +1,5 @@
 import './styles.scss';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, SetStateAction, Dispatch } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import MediaQuery from 'react-responsive'
@@ -10,12 +10,19 @@ import { routeLinks } from '../../constants/routes';
 import BurgerButton from '../BurgerButton';
 import BurgerMenu from '../../../BurgerMenu';
 
-const RoutesNavigation: React.FC = () => {
+interface RoutesNavigationProps {
+  setIsFilterBlockVisible: Dispatch<SetStateAction<boolean>>,
+}
+
+const RoutesNavigation: React.FC<RoutesNavigationProps> = ({
+  setIsFilterBlockVisible,
+}) => {
   const [t] = useTranslation();
   const location = useLocation();
   const [isBurgerMenuOpened, setIsBurgerMenuOpened] = useState<boolean>(false);
+
   const onOpenFilterBlock = useCallback(() => {
-    console.log('filter');
+    setIsFilterBlockVisible((prevValue) => !prevValue);
   }, []);
 
   const onOpenBurgerMenu = useCallback(() => {

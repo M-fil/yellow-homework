@@ -5,17 +5,21 @@ $container-background-color: #eaeaea;
 
 .filter-block {
   position: absolute;
-  top: 100%;
   left: 0;
   right: 0;
+  top: 100%;
   margin: 0 auto;
 
-  display: flex;
+  display: none;
   
   height: $container-height;
   padding: 15px 0;
   background-color: $container-background-color;
   box-sizing: border-box;
+
+  &_opened {
+    display: flex;
+  }
 
   @include media-tablet {
     justify-content: center;

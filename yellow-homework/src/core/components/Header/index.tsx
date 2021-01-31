@@ -1,5 +1,5 @@
 import './styles.scss';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import LogoImage from '../../../assets/images/header/logo.png';
@@ -12,8 +12,10 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ showRoutesNavigation = false }) => {
   const [t] = useTranslation();
+  const [isFilterBlockVisible, setIsFilterBlockVisible] = useState<boolean>(false);
 
   return (
+    <>
     <header className="header">
       <div className="header__logo-container">
         <img
@@ -26,12 +28,11 @@ const Header: React.FC<HeaderProps> = ({ showRoutesNavigation = false }) => {
         </h1>
       </div>
       {showRoutesNavigation && (
-        <>
-          <RoutesNavigation />
-        </>
+        <RoutesNavigation setIsFilterBlockVisible={setIsFilterBlockVisible} />
       )}
-      <FilterBlock />
+      <FilterBlock isVisible={isFilterBlockVisible} />
     </header>
+    </>
   );
 };
 

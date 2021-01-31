@@ -1,14 +1,19 @@
 import './styles.scss';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import DefaultInput from '../DefaultInput';
 
-const FilterBlock: React.FC = () => {
+interface FilterBlockProps {
+  isVisible: boolean,
+}
+
+const FilterBlock: React.FC<FilterBlockProps> = ({ isVisible }) => {
   const [t] = useTranslation();
+  const openedClassName = useMemo(() => isVisible ? 'filter-block_opened' : '', [isVisible]);
 
   return (
-    <div className="filter-block">
+    <div className={`filter-block ${openedClassName}`}>
       <div className="filter-block__wrapper">
         <DefaultInput
           type="date"
