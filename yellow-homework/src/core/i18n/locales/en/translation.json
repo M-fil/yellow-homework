@@ -1,6 +1,11 @@
 {
   "header": {
-    "logo-title": "LOGOBEAR"
+    "logo-title": "LOGOBEAR",
+    "routes": {
+      "jogs": "Jogs",
+      "info": "Info",
+      "contact-us": "Contact us"
+    }
   },
   "auth": {
     "login-button-text": "Let me in"

@@ -3,8 +3,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import LogoImage from '../../../assets/images/header/logo.png';
+import RoutesNavigation from './components/RoutesNavigation';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  showRoutesNavigation?: boolean;
+}
+
+const Header: React.FC<HeaderProps> = ({ showRoutesNavigation = false }) => {
   const [t] = useTranslation();
 
   return (
@@ -19,6 +24,9 @@ const Header: React.FC = () => {
           {t('header.logo-title')}
         </h1>
       </div>
+      {showRoutesNavigation && (
+        <RoutesNavigation />
+      )}
     </header>
   );
 };

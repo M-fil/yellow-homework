@@ -27,13 +27,11 @@ const App: React.FC = () => {
     <div id="App">
       <GlobalContext.Provider value={contextValue}>
         {isLoading && <Loader />}
-        <Header />
         <Router>
+          <Header showRoutesNavigation={isAuthenticated} />
           <Switch>
             {isAuthenticated ? (
-              <Route name={MainRoutes.Main} exact>
-                <MainPage />
-              </Route>
+              <MainPage />
             ): (
               <Route name={MainRoutes.Auth} exact>
                 <AuthPage />

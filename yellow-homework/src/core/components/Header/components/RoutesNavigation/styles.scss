@@ -1,0 +1,45 @@
+@import "../../../../styles/fonts.scss";
+
+$default-text-color: #ffffff;
+
+.routes-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-right: 50px;
+
+    & > .routes-navigation__list-item:not(:last-child) {
+      margin-right: 45px;
+    }
+  }
+
+  &__list-item {
+    @include Text-Style-3;
+
+    color: $default-text-color;
+    text-decoration: none;
+  }
+
+  .filter-button {
+    cursor: pointer;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    outline: none;
+    background: none;
+
+    &, &__icon {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
