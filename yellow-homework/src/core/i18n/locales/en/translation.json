@@ -17,9 +17,11 @@
     "speed-text": "Speed",
     "distance-text": "Distance",
     "time-text": "Time",
+    "date-text": "Date",
     "time-dimension": "min",
     "distance-dimension": "km",
-    "speed-dimension": "km/min"
+    "speed-dimension": "km/min",
+    "save-jog-text": "Save"
   },
   "auth": {
     "login-button-text": "Let me in"

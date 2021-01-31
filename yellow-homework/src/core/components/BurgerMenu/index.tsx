@@ -5,9 +5,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive'
 
 import BurgerMenuLogo from '../../../assets/images/header/burger-menu-logo.png';
-import CloseIcon from '../../../assets/images/header/close.svg';
 import { routeLinks } from '../Header/constants/routes';
 import { ScreenWidths } from '../../constants/screen-width';
+import CloseButton from '../Button/close-button';
 
 interface BurgerMenuProps {
   closeMenu: () => void,
@@ -44,17 +44,10 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({ closeMenu, isOpened }) => {
               {t('header.logo-title')}
             </h2>
           </div>
-          <button
-            type="button"
-            className="burger-menu__close-button"
-            onClick={closeMenu}
-          >
-            <img
-              src={CloseIcon}
-              alt="close-icon"
-              className="burger-menu__close-icon"
-            />
-          </button>
+          <CloseButton
+            closeFn={closeMenu}
+            extraClassName="burger-menu__close-button"
+          />
         </div>
         <div className="burger-menu__links">
           {routeLinks.map((link) => {

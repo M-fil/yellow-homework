@@ -1,0 +1,133 @@
+@import "../../../../core/styles/fonts.scss";
+@import "../../../../core/styles/media.scss";
+
+$button-size: 60px;
+$default-side-indent: 40px;
+$modal-background-color: #7ed321;
+$overlay-background-color: rgba(255, 255, 255, 0.5);
+$input-label-text-color: #000000;
+
+.create-jog-btn {
+  cursor: pointer;
+  
+  position: fixed;
+  bottom: $default-side-indent;
+  right: $default-side-indent;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+  outline: none;
+  background: none;
+
+  border-radius: 50%;
+  width: $button-size;
+  height: $button-size;
+}
+
+.create-jog-icon {
+  width: $button-size;
+  height: $button-size;
+}
+
+.jog-modal-overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 2000;
+  background-color: $overlay-background-color;
+}
+
+.jog-modal {
+  position: relative;
+  box-sizing: border-box;
+
+  background-color: $modal-background-color;
+  padding: 100px 90px 45px 90px;
+  border-radius: 44px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+
+  @include media-tablet {
+    width: 70vw;
+    padding: 60px 35px 35px 35px;
+    align-items: center;
+  }
+
+  @include media-mobile {
+    width: 80vw;
+  }
+
+  @include media-mobile-small {
+    width: 90vw;
+  }
+
+  &__header {
+    cursor: pointer;
+    position: absolute;
+
+    right: 25px;
+    top: 25px;
+  }
+
+  &__submit-button {
+    @include Text-Style;
+
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  &__label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    @include media-tablet {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 25px;
+    }
+
+    &:last-child {
+      margin-bottom: 46px;
+    }
+
+    .input-field {
+      width: 235px;
+      height: 30px;
+      padding-left: 10px;
+      box-sizing: border-box;
+
+      @include media-tablet {
+        width: 100%;
+      }
+    }
+
+    .label__text {
+      @include Text-Style-7;
+
+      @include media-tablet {
+        margin-bottom: 6px;
+      }
+
+      color: $input-label-text-color !important;
+    }
+  }
+}

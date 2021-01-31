@@ -6,6 +6,7 @@ import * as JogService from '../../core/services/jogs';
 import * as AuthService from '../../core/services/auth';
 import Loader from '../../core/components/Loader';
 import JogItem from './components/JogItem';
+import CreateJogModal from './components/CreateJogModal';
 
 const JogsPage: React.FC = () => {
   const token = AuthService.getSavedToken();
@@ -31,6 +32,7 @@ const JogsPage: React.FC = () => {
 
   return (
     <div className="jogging-page">
+      <CreateJogModal />
       {isLoading && <Loader />}
       {(jogs.length === 0 && !isLoading) ? (
         <NoItemsBlock />
