@@ -13,7 +13,13 @@
   },
   "jogging": {
     "no-items-text": "Nothing is there",
-    "create-jog-button-text": "Create your jog first"
+    "create-jog-button-text": "Create your jog first",
+    "speed-text": "Speed",
+    "distance-text": "Distance",
+    "time-text": "Time",
+    "time-dimension": "min",
+    "distance-dimension": "km",
+    "speed-dimension": "km/min"
   },
   "auth": {
     "login-button-text": "Let me in"

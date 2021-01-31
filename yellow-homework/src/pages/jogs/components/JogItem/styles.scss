@@ -1,0 +1,43 @@
+@import "../../../../core/styles/fonts.scss";
+
+$default-icon-size: 87px;
+$date-text-color: #cac5c5;
+$parameter-key-color: #000000;
+$parameter-value-color: #878787;
+
+.jog-item {
+  display: flex;
+  align-items: center;
+
+  &__icon {
+    width: $default-icon-size;
+    height: $default-icon-size;
+
+    margin-right: 45px;
+  }
+
+  &__date {
+    @include Text-Style;
+
+    color: $date-text-color;
+    margin-bottom: 5px;
+  }
+
+  &__parameter {
+    &:not(:last-child) {
+      margin-bottom: 5px;
+    }
+  }
+
+  .parameter-key {
+    @include Text-Style-3;
+
+    color: $parameter-key-color;
+  }
+
+  .parameter-value {
+    @include Text-Style;
+
+    color: $parameter-value-color;
+  }
+}
