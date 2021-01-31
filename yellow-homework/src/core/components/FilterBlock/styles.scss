@@ -1,0 +1,56 @@
+@import "../../styles/media.scss";
+
+$container-height: 60px;
+$container-background-color: #eaeaea;
+
+.filter-block {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+
+  display: flex;
+  
+  height: $container-height;
+  padding: 15px 0;
+  background-color: $container-background-color;
+  box-sizing: border-box;
+
+  @include media-tablet {
+    justify-content: center;
+    height: auto;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    @include media-tablet {
+      flex-direction: column;
+      align-items: flex-end;
+
+      width: fit-content;
+    }
+  }
+
+  &__label {
+    &:not(:last-child) {
+      margin-right: 45px;
+
+      @include media-tablet {
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
+    }
+
+    .input-field {
+      width: 100px;
+      height: 30px;
+      text-align: center;
+    }
+  }
+}

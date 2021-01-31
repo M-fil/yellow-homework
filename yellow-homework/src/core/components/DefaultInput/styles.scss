@@ -1,0 +1,23 @@
+@import "../../styles/fonts.scss";
+
+$default-label-color: #a5a5a5;
+$default-input-border: solid 1px #979797;
+$default-input-background-color: #ffffff;
+
+.label {
+  &__text {
+    @include Text-Style-5;
+
+    color: $default-label-color;
+    margin-right: 15px;
+  }
+}
+
+.input-field {
+  min-height: 30px;
+  border-radius: 11px;
+  
+  border: $default-input-border;
+  background-color: $default-input-background-color;
+  color: $default-label-color;
+}

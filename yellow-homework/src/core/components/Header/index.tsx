@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import LogoImage from '../../../assets/images/header/logo.png';
 import RoutesNavigation from './components/RoutesNavigation';
+import FilterBlock from '../FilterBlock';
 
 interface HeaderProps {
   showRoutesNavigation?: boolean;
@@ -29,6 +30,7 @@ const Header: React.FC<HeaderProps> = ({ showRoutesNavigation = false }) => {
           <RoutesNavigation />
         </>
       )}
+      <FilterBlock />
     </header>
   );
 };

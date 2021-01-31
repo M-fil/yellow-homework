@@ -6,6 +6,8 @@ $logo-image-width: 44px;
 $logo-image-height: 55px;
 
 .header {
+  position: relative;
+  
   display: flex;
   justify-content: space-between;
   align-items: center;

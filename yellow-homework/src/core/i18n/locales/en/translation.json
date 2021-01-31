@@ -5,6 +5,10 @@
       "jogs": "Jogs",
       "info": "Info",
       "contact-us": "Contact us"
+    },
+    "filter": {
+      "from-btn-text": "Date from",
+      "to-btn-text": "Date to"
     }
   },
   "auth": {
