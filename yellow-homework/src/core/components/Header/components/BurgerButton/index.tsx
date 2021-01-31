@@ -1,12 +1,13 @@
 import './styles.scss';
-import React, { MouseEvent, useCallback, useMemo, useState } from 'react';
+import React, { MouseEvent, useCallback, useEffect, useMemo, useState } from 'react';
 
 interface BurgerButtonProps {
   onClick: (event: MouseEvent<HTMLButtonElement>, isActive: boolean) => void;
+  isBurgerMenuOpened: boolean;
 }
 
 const BurgerButton: React.FC<BurgerButtonProps> = ({
-  onClick,
+  onClick, isBurgerMenuOpened,
 }) => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const activeClassName = useMemo(() => isActive ? 'burger-button_active' : '', [isActive]);
@@ -15,6 +16,12 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
     setIsActive((prevIsActive) => !prevIsActive);
     onClick(event, isActive);
   }, [isActive]);
+
+  useEffect(() => {
+    if (!isBurgerMenuOpened) {
+      setIsActive(false);
+    }
+  }, [isBurgerMenuOpened]);
 
   return (
     <button
