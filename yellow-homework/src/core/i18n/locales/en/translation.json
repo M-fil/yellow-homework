@@ -11,6 +11,10 @@
       "to-btn-text": "Date to"
     }
   },
+  "jogging": {
+    "no-items-text": "Nothing is there",
+    "create-jog-button-text": "Create your jog first"
+  },
   "auth": {
     "login-button-text": "Let me in"
   }

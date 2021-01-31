@@ -1,3 +1,4 @@
+import './styles.scss';
 import React from 'react';
 import { Route } from 'react-router-dom';
 
@@ -8,7 +9,7 @@ import { MainRoutes } from '../../core/constants/routes';
 
 const MainPage: React.FC = () => {  
   return (
-    <>
+    <main id="main-block">
       <Route path={[MainRoutes.Jogs, MainRoutes.Main]} exact>
         <JogsPage />
       </Route>
@@ -18,7 +19,7 @@ const MainPage: React.FC = () => {
       <Route path={MainRoutes.ContactUs}>
         <ContactUsPage />
       </Route>
-    </>
+    </main>
   );
 };
 

@@ -1,9 +1,12 @@
+import './styles.scss';
 import React from 'react';
+
+import NoItemsBlock from './components/NoItemsBlock';
 
 const JogsPage: React.FC = () => {
   return (
-    <div>
-      JogsPage
+    <div className="jogging-page">
+      <NoItemsBlock />
     </div>
   );
 };
