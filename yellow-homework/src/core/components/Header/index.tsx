@@ -25,7 +25,9 @@ const Header: React.FC<HeaderProps> = ({ showRoutesNavigation = false }) => {
         </h1>
       </div>
       {showRoutesNavigation && (
-        <RoutesNavigation />
+        <>
+          <RoutesNavigation />
+        </>
       )}
     </header>
   );

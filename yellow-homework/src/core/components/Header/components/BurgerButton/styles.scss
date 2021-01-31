@@ -1,0 +1,29 @@
+$default-width: 37px;
+$default-height: 32px;
+$line-color: #ffffff;
+
+.burger-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  width: $default-width;
+  height: $default-height;
+
+  border: none;
+  outline: none;
+  background: none;
+
+  transition: 0.4s ease;
+
+  &__line {
+    background: $line-color;
+    width: $default-width;
+    height: 5px;
+  }
+
+  &_active {
+    transform: rotate(-90deg);
+  }
+}

@@ -1,4 +1,5 @@
 @import "../../../../styles/fonts.scss";
+@import "../../../../styles/media.scss";
 
 $default-text-color: #ffffff;
 
@@ -22,13 +23,29 @@ $default-text-color: #ffffff;
   &__list-item {
     @include Text-Style-3;
 
+    position: relative;
     color: $default-text-color;
     text-decoration: none;
+
+    &_active {
+      &::after {
+        content: "";
+
+        position: absolute;
+        bottom: -7px;
+        left: 0;
+        
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: $default-text-color;
+      }
+    }
   }
 
   .filter-button {
     cursor: pointer;
-    
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,6 +57,10 @@ $default-text-color: #ffffff;
     &, &__icon {
       width: 40px;
       height: 40px;
+    }
+
+    @include media-tablet {
+      margin-right: 40px;
     }
   }
 }
