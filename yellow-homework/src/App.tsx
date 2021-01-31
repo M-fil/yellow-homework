@@ -1,4 +1,9 @@
 import React, { useMemo, useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
 
 import Header from './core/components/Header';
 import Loader from './core/components/Loader';
@@ -6,6 +11,7 @@ import MainPage from './pages/main';
 import AuthPage from './pages/auth';
 import { GlobalContextObject, GlobalContext } from './core/context/global';
 import * as AuthService from './core/services/auth';
+import { MainRoutes } from './core/constants/routes';
 
 const App: React.FC = () => {
   const token = AuthService.getSavedToken();
@@ -19,14 +25,22 @@ const App: React.FC = () => {
 
   return (
     <div id="App">
-      {isLoading && <Loader />}
       <GlobalContext.Provider value={contextValue}>
+        {isLoading && <Loader />}
         <Header />
-        {isAuthenticated ? (
-          <MainPage />
-        ): (
-          <AuthPage />
-        )}
+        <Router>
+          <Switch>
+            {isAuthenticated ? (
+              <Route name={MainRoutes.Main} exact>
+                <MainPage />
+              </Route>
+            ): (
+              <Route name={MainRoutes.Auth} exact>
+                <AuthPage />
+              </Route>
+            )}
+          </Switch>
+        </Router>
       </GlobalContext.Provider>
     </div>
   );

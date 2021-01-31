@@ -15,11 +15,11 @@ const LoginModal: React.FC = () => {
     globalContext.setIsLoading(true);
     AuthService.loginUser()
       .then((data) => {
-        if (data.error) {
+        if (data && data.error) {
           throw new Error(data.error);
         }
 
-        globalContext.setIsAuthenticated(!!data.token)
+        globalContext.setIsAuthenticated(!!(data && data.token));
       })
       .catch((error: Error) => {
         console.log(error);

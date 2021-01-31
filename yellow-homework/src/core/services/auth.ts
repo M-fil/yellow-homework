@@ -1,4 +1,3 @@
-import { EnvConfig } from '../constants/env-config';
 import { Urls } from '../constants/urls';
 
 type LoginUserOutput = Promise<{ token: string } | { error: string }>;
@@ -15,13 +14,10 @@ export const removeToken = (): void => {
   localStorage.removeItem(LOCAL_STORAGE_TOKEN);
 };
 
-export const loginUser = async (uuid = 'hello'): LoginUserOutput => {
+export const loginUser = async (uuid = 'hello') => {
   try {
     const response = await fetch(Urls.Auth, {
       method: 'POST',
-      headers: {
-        Authorization: `Bearer ${EnvConfig.BACKEND_KEY}`,
-      },
       body: JSON.stringify({ uuid }),
     });
     const data = await response.json();
