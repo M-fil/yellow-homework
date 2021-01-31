@@ -1,3 +1,5 @@
+@import "../../styles/media.scss";
+
 $main-background-color: #7ed321;
 $main-text-color: #ffffff;
 $logo-image-width: 44px;
@@ -11,11 +13,19 @@ $logo-image-height: 55px;
   padding: 30px 37px;
   background-color: $main-background-color;
 
+  @include media-mobile {
+    padding: 20px 25px;
+  }
+
   &__logo-image {
     width: $logo-image-width;
     height: $logo-image-height;
 
     margin-right: 20px;
+
+    @include media-mobile {
+      margin-right: 10px;
+    }
   }
 
   &__logo-container {
@@ -26,5 +36,9 @@ $logo-image-height: 55px;
 
   &__logo-title {
     color: $main-text-color;
+
+    @include media-mobile {
+      font-size: 1.6rem;
+    }
   }
 }

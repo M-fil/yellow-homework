@@ -8,6 +8,11 @@ $default-text-color: #ffffff;
   justify-content: space-between;
   align-items: center;
 
+  @include media-mobile-small {
+    flex-direction: column;
+    justify-content: center;
+  }
+
   &__list {
     display: flex;
     justify-content: space-between;
@@ -61,6 +66,11 @@ $default-text-color: #ffffff;
 
     @include media-tablet {
       margin-right: 40px;
+    }
+
+    @include media-mobile-small {
+      margin-right: 0;
+      margin-bottom: 10px;
     }
   }
 }

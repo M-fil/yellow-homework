@@ -1,11 +1,13 @@
 import './styles.scss';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive'
 
 import BurgerMenuLogo from '../../../assets/images/header/burger-menu-logo.png';
 import CloseIcon from '../../../assets/images/header/close.svg';
 import { routeLinks } from '../Header/constants/routes';
+import { ScreenWidths } from '../../constants/screen-width';
 
 interface BurgerMenuProps {
   closeMenu: () => void,
@@ -16,6 +18,13 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({ closeMenu, isOpened }) => {
   const [t] = useTranslation();
   const location = useLocation();
   const activeClassName = useMemo(() => isOpened ? 'burger-menu_opened' : '', [isOpened]);
+  const isTabletWidth = useMediaQuery({ maxDeviceWidth: ScreenWidths.TabletWidth });
+
+  useEffect(() => {
+    if (!isTabletWidth) {
+      closeMenu();
+    }
+  }, [isTabletWidth, closeMenu]);
 
   const onLinkClickHandler = useCallback(() => {
     closeMenu();
