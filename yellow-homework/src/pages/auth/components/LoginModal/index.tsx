@@ -27,7 +27,7 @@ const LoginModal: React.FC = () => {
       .finally(() => {
         globalContext.setIsLoading(false);
       });
-  }, []);
+  }, [globalContext]);
 
   return (
     <div className="login-modal">

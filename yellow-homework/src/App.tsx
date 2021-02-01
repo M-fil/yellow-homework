@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -32,7 +32,7 @@ const App: React.FC = () => {
           <Switch>
             {isAuthenticated ? (
               <MainPage />
-            ): (
+            ) : (
               <Route name={MainRoutes.Auth} exact>
                 <AuthPage />
               </Route>

@@ -4,9 +4,9 @@ export const formatDate = (date: Date, reversedDate = false, separator = '.'): s
   let day = String(d.getDate())
   const year = d.getFullYear();
 
-  if (month.length < 2) 
+  if (month.length < 2)
       month = `0${month}`;
-  if (day.length < 2) 
+  if (day.length < 2)
       day = `0${day}`;
 
   if (reversedDate) {

@@ -1,6 +1,6 @@
 import { Urls } from '../constants/urls';
 
-type LoginUserOutput = Promise<{ token: string } | { error: string }>;
+type LoginUserOutput = Promise<{ token?: string, error?: string }>;
 
 const LOCAL_STORAGE_TOKEN = 'LOCAL_STORAGE_TOKEN';
 
@@ -14,7 +14,7 @@ export const removeToken = (): void => {
   localStorage.removeItem(LOCAL_STORAGE_TOKEN);
 };
 
-export const loginUser = async (uuid = 'hello') => {
+export const loginUser = async (uuid = 'hello'): LoginUserOutput => {
   try {
     const response = await fetch(Urls.Auth, {
       method: 'POST',
@@ -27,11 +27,13 @@ export const loginUser = async (uuid = 'hello') => {
 
     const token = data.response.access_token;
     setTokenLocally(token);
-    
+
     return { token };
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
       return { error: error.message };
     }
+
+    return { error: '' };
   }
 };

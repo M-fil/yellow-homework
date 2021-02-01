@@ -8,9 +8,9 @@ export interface JogEntity {
   user_id: string
 }
 
-type GetAllJogsOutput = Promise<{ jogs: JogEntity[] } | { error: string }>
+type GetAllJogsOutput = Promise<{ jogs?: JogEntity[], error?: string }>
 
-export const getAllJogs = async (token: string) => {
+export const getAllJogs = async (token: string): GetAllJogsOutput => {
   try {
     const response = await fetch(Urls.Jogs, {
       method: 'GET',
@@ -29,5 +29,7 @@ export const getAllJogs = async (token: string) => {
     if (error instanceof Error) {
       return { error: error.message };
     }
+
+    return { error: '' };
   }
 };
