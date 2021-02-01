@@ -20,12 +20,13 @@ interface FormValues {
 interface CreateJogModalProps {
   isOpened: boolean,
   closeModal: () => void,
+  updateJogs: (newJog: JogService.JogEntity) => void,
 }
 
 const mockFn = () => { };
 const currentDate = formatDate(new Date(Date.now()), true, '-');
 
-const CreateJogModal: React.FC<CreateJogModalProps> = ({ isOpened, closeModal }) => {
+const CreateJogModal: React.FC<CreateJogModalProps> = ({ isOpened, closeModal, updateJogs }) => {
   const [formValues, setFormValues] = useState<FormValues>({
     distance: 1,
     time: 1,
@@ -54,15 +55,16 @@ const CreateJogModal: React.FC<CreateJogModalProps> = ({ isOpened, closeModal })
 
     JogService.createNewJog(token, newJog)
       .then((data) => {
-        if (data === 'success') {
+        if (data.jog) {
           const message = t('messages.create-jog-success');
           addToast(message, { appearance: 'success', autoDismiss: true });
+          updateJogs(data.jog);
           closeModal();
         } else {
-          addToast(data, { appearance: 'error', autoDismiss: true });
+          addToast(data.error, { appearance: 'error', autoDismiss: true });
         }
       })
-  }, [formValues, t, addToast, closeModal]);
+  }, [formValues, t, addToast, closeModal, updateJogs]);
 
   const onCloseModal = useCallback(() => {
     closeModal();
@@ -102,7 +104,7 @@ const CreateJogModal: React.FC<CreateJogModalProps> = ({ isOpened, closeModal })
           extraClassName="jog-modal__label"
           onChange={onFormValueChange('date')}
           labelText={t('jogging.date-text')}
-          max={currentDate}
+        // max={currentDate}
         />
         <DefaultButton
           text={t('jogging.save-jog-text')}

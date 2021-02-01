@@ -1,5 +1,5 @@
 import './styles.scss';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Route } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications'
 
@@ -9,6 +9,7 @@ import JogsPage from '../jogs';
 import { MainRoutes } from '../../core/constants/routes';
 import * as JogService from '../../core/services/jogs';
 import * as AuthService from '../../core/services/auth';
+import { sortJogsByDate } from '../../core/utils/sort';
 
 const MainPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -21,7 +22,7 @@ const MainPage: React.FC = () => {
 
     JogService.getAllJogs(token)
       .then((data) => {
-        const sortedJogs = (data.jogs || []).sort((a, b) => b.date - a.date);
+        const sortedJogs = (data.jogs || []).sort(sortJogsByDate);
         setJogs(sortedJogs);
       })
       .catch((error: Error) => {
@@ -34,10 +35,18 @@ const MainPage: React.FC = () => {
       });
   }, [addToast, token]);
 
+  const updateJogs = useCallback((newJog: JogService.JogEntity) => {
+    setJogs((prevJogs) => ([...prevJogs, newJog].sort(sortJogsByDate)));
+  }, [setJogs]);
+
   return (
     <main id="main-block">
       <Route path={[MainRoutes.Jogs, MainRoutes.Main]} exact>
-        <JogsPage jogs={jogs} isJogsLoading={isLoading} />
+        <JogsPage
+          jogs={jogs}
+          isJogsLoading={isLoading}
+          updateJogs={updateJogs}
+        />
       </Route>
       <Route path={MainRoutes.Info}>
         <InfoPage />

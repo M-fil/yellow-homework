@@ -15,9 +15,10 @@ const currentDate = formatDate(new Date(Date.now()), true, '-');
 interface JogsPageProps {
   jogs: JogService.JogEntity[],
   isJogsLoading: boolean,
+  updateJogs: (newJog: JogService.JogEntity) => void,
 }
 
-const JogsPage: React.FC<JogsPageProps> = ({ jogs, isJogsLoading }) => {
+const JogsPage: React.FC<JogsPageProps> = ({ jogs, isJogsLoading, updateJogs }) => {
   const [isCreateJogModalOpened, setIsCreateJogModalOpened] = useState<boolean>(false);
   const [jogsToShow, setJogsToShow] = useState<JogService.JogEntity[]>([]);
   const globalContext = useContext(GlobalContext);
@@ -26,7 +27,7 @@ const JogsPage: React.FC<JogsPageProps> = ({ jogs, isJogsLoading }) => {
     if (jogs.length > 0) {
       setJogsToShow(jogs);
     }
-  }, [jogs]);
+  }, [jogs.length]);
 
   useEffect(() => {
     if (!isJogsLoading) {
@@ -54,6 +55,7 @@ const JogsPage: React.FC<JogsPageProps> = ({ jogs, isJogsLoading }) => {
       <CreateJogModal
         isOpened={isCreateJogModalOpened}
         closeModal={onCloseCreateJogModal}
+        updateJogs={updateJogs}
       />
       {isJogsLoading && <Loader />}
       {(jogsToShow.length === 0 && !isJogsLoading) ? (

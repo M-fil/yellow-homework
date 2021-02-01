@@ -1,3 +1,5 @@
+const NUMBER_OF_MILLISECONDS_IN_SECOND = 1000;
+
 export const formatDate = (date: Date, reversedDate = false, separator = '.'): string => {
   const d = new Date(date);
   let month = String(d.getMonth() + 1);
@@ -24,18 +26,22 @@ export function filterByDatesInRange<T extends { date: number }>(
 
   if (!startDate) {
     return values.filter((item) => {
-      const timeValue = isTimeInMilliseconds ? item.date : item.date * 1000;
+      const timeValue = isTimeInMilliseconds ? item.date : item.date * NUMBER_OF_MILLISECONDS_IN_SECOND;
       return new Date(timeValue) <= convertedEndDate;
     });
   } else if (!endDate) {
     return values.filter((item) => {
-      const timeValue = isTimeInMilliseconds ? item.date : item.date * 1000;
+      const timeValue = isTimeInMilliseconds ? item.date : item.date * NUMBER_OF_MILLISECONDS_IN_SECOND;
       return new Date(timeValue) >= convertedStartDate;
     });
   }
 
   return values.filter((item) => {
-    const timeValue = isTimeInMilliseconds ? item.date : item.date * 1000;
+    const timeValue = isTimeInMilliseconds ? item.date : item.date * NUMBER_OF_MILLISECONDS_IN_SECOND;
     return new Date(timeValue) >= convertedStartDate && new Date(timeValue) <= convertedEndDate;
   });
-}
+};
+
+export const convertDateInSecondsNumber = (dateString: string): number => {
+  return (new Date(dateString).getTime() / NUMBER_OF_MILLISECONDS_IN_SECOND);
+};

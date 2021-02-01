@@ -1,10 +1,11 @@
 import { Urls } from '../constants/urls';
+import { convertDateInSecondsNumber } from '../utils/date';
 export interface JogEntity {
   date: number,
   distance: number,
-  id: number
-  time: number
-  user_id: string
+  id: number,
+  time: number,
+  user_id: string,
 }
 
 export interface JogRequestBody {
@@ -20,7 +21,7 @@ export interface FilterValues {
 }
 
 type GetAllJogsOutput = Promise<{ jogs?: JogEntity[], error?: string }>
-type CreateNewJogOutput = Promise<'success' | string>
+type CreateNewJogOutput = Promise<{ jog?: JogEntity, error?: string }>
 
 const LOCAL_STORAGE_FILTER_VALUES = 'LOCAL_STORAGE_FILTER_VALUES';
 
@@ -68,17 +69,24 @@ export const createNewJog = async (token: string, jog: JogRequestBody): CreateNe
       body: JSON.stringify(jog),
     });
     const data = await response.json();
-
     if (!response.ok) {
       throw new Error(data.error_message);
     }
+    const { distance, id, time, date, user_id } = data.response;
+    const createdJog: JogEntity = {
+      date: convertDateInSecondsNumber(date),
+      distance,
+      id,
+      time,
+      user_id,
+    };
 
-    return 'success';
+    return { jog: createdJog };
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
-      return error.message;
+      return { error: error.message };
     }
 
-    return '';
+    return { error: '' };
   }
 }
