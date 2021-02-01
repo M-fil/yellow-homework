@@ -1,0 +1,37 @@
+@import "../../../../core/styles/fonts.scss";
+@import "../../../../core/styles/media.scss";
+
+$form-background-color: #7ed321;
+$default-form-size: 400px;
+$input-text-color: #000000;
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: $form-background-color;
+  width: $default-form-size;
+  height: $default-form-size;
+  border-radius: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+
+  @include media-mobile {
+    width: 90vw;
+    height: 40vh;
+  }
+
+  &__input {
+    @include Text-Style;
+
+    color: $input-text-color;
+  }
+
+  &__submit-button,
+  &__input {
+    margin-bottom: 20px;
+    padding: 10px 15px;
+  }
+}

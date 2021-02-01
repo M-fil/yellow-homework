@@ -1,5 +1,4 @@
 import { Urls } from '../constants/urls';
-
 export interface JogEntity {
   date: number,
   distance: number,
