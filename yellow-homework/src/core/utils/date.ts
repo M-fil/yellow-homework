@@ -17,18 +17,25 @@ export const formatDate = (date: Date, reversedDate = false, separator = '.'): s
 };
 
 export function filterByDatesInRange<T extends { date: number }>(
-  startDate: string, endDate: string, values: T[],
+  startDate: string, endDate: string, values: T[], isTimeInMilliseconds: boolean = false,
 ) {
   const convertedStartDate = new Date(startDate);
   const convertedEndDate = new Date(endDate);
 
   if (!startDate) {
-    return values.filter((item) => new Date(item.date) <= convertedEndDate);
+    return values.filter((item) => {
+      const timeValue = isTimeInMilliseconds ? item.date : item.date * 1000;
+      return new Date(timeValue) <= convertedEndDate;
+    });
   } else if (!endDate) {
-    return values.filter((item) => new Date(item.date) >= convertedStartDate);
+    return values.filter((item) => {
+      const timeValue = isTimeInMilliseconds ? item.date : item.date * 1000;
+      return new Date(timeValue) >= convertedStartDate;
+    });
   }
 
-  return values.filter((item) =>
-    new Date(item.date) >= convertedStartDate && new Date(item.date) <= convertedEndDate,
-  );
+  return values.filter((item) => {
+    const timeValue = isTimeInMilliseconds ? item.date : item.date * 1000;
+    return new Date(timeValue) >= convertedStartDate && new Date(timeValue) <= convertedEndDate;
+  });
 }

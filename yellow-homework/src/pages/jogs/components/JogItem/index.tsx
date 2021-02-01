@@ -16,7 +16,10 @@ interface JogItemProps {
 const JogItem: React.FC<JogItemProps> = ({ id, date, distance, time }) => {
   const [t] = useTranslation();
   const speed = useMemo(() => calculateSpeedInKmH(distance, time), [distance, time]);
-  const formattedDate = useMemo(() => formatDate(new Date(date)), [date]);
+  const formattedDate = useMemo(() => {
+    const timeInMilliseconds = date * 1000;
+    return formatDate(new Date(timeInMilliseconds));
+  }, [date]);
 
   return (
     <div className="jog-item" data-jog-id={id}>
