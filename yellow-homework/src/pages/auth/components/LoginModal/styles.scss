@@ -1,11 +1,21 @@
+@import "../../../../core/styles/media.scss";
+
 $default-logo-img-width: 160px;
 $default-logo-img-height: 150px;
 $default-modal-width: 500px;
 $default-modal-height: 380px;
 $default-modal-background: #e990f9;
+$button-mobile-color: #e990f9;
 
 .login-modal {
-  &__wrapper {
+  @include media-tablet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  &__container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,11 +32,20 @@ $default-modal-background: #e990f9;
     height: $default-logo-img-height;
 
     margin-bottom: 55px;
+
+    @include media-tablet {
+      margin-bottom: 100px;
+    }
   }
 
   &__auth-button {
     font-size: 1.8rem;
     line-height: 2rem;
     padding: 20px 34px 19px;
+
+    @include media-tablet {
+      color: $button-mobile-color;
+      border-color: $button-mobile-color;
+    }
   }
 }
