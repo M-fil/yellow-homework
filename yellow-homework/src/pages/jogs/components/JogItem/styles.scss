@@ -1,13 +1,26 @@
 @import "../../../../core/styles/fonts.scss";
+@import "../../../../core/styles/media.scss";
 
 $default-icon-size: 87px;
 $date-text-color: #cac5c5;
 $parameter-key-color: #000000;
 $parameter-value-color: #878787;
+$default-border: 1px solid rgb(215, 215, 215);
 
 .jog-item {
   display: flex;
   align-items: center;
+
+  @include media-mobile {
+    position: relative;
+
+    justify-content: center;
+
+    padding: 45px 0;
+    border-bottom: $default-border;
+    width: 100%;
+    box-sizing: border-box;
+  }
 
   &__icon {
     width: $default-icon-size;

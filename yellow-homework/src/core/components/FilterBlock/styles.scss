@@ -17,6 +17,8 @@ $container-background-color: #eaeaea;
   background-color: $container-background-color;
   box-sizing: border-box;
 
+  z-index: 250;
+
   @include media-mobile {
     height: fit-content;
   }

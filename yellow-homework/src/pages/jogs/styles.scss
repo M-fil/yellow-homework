@@ -1,14 +1,25 @@
+@import "../../core/styles/media.scss";
+
 .jogging-page {
   display: flex;
   flex-direction: column;
   align-items: center;
 
   flex-grow: 1;
-  padding: 50px 0;
   height: 200px;
   overflow: auto;
 
+  &__items {
+    @include media-mobile {
+      width: 100%;
+    }
+  }
+
   & .jog-item {
     margin-bottom: 80px;
+
+    @include media-mobile {
+      margin-bottom: 0;
+    }
   }
 }

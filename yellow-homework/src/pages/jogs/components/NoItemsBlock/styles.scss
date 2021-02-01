@@ -1,7 +1,9 @@
 @import "../../../../core/styles/fonts.scss";
+@import "../../../../core/styles/media.scss";
 
 $main-text-color: #d1d0d0;
 $default-icon-size: 150px;
+$mobile-icon-size: 85px;
 $create-jog-button-color: #e990f9;
 
 .no-items-block {
@@ -30,11 +32,18 @@ $create-jog-button-color: #e990f9;
     font-size: 2.4rem;
     color: $main-text-color;
     text-align: center;
+    margin: 0;
+    margin-top: 30px;
   }
 
   &__image {
     width: $default-icon-size;
     height: $default-icon-size;
+
+    @include media-mobile {
+      width: $mobile-icon-size;
+      height: $mobile-icon-size;
+    }
   }
 
   &__create-jog-btn {

@@ -1,13 +1,16 @@
+@import "../../../../core/styles/media.scss";
+
 $button-size: 60px;
-$default-side-indent: 40px;
+$default-size-indent: 40px;
+$mobile-size-indent: 30px;
 $default-background-color: #ffffff;
 
 .create-jog-btn {
   cursor: pointer;
   
   position: fixed;
-  bottom: $default-side-indent;
-  right: $default-side-indent;
+  bottom: $default-size-indent;
+  right: $default-size-indent;
 
   display: flex;
   justify-content: center;
@@ -21,6 +24,11 @@ $default-background-color: #ffffff;
   border-radius: 50%;
   width: $button-size;
   height: $button-size;
+
+  @include media-mobile {
+    bottom: $mobile-size-indent;
+    right: $mobile-size-indent;
+  }
 }
 
 .create-jog-icon {

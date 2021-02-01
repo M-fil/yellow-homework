@@ -8,6 +8,7 @@ import BurgerMenuLogo from '../../../assets/images/header/burger-menu-logo.png';
 import { routeLinks } from '../Header/constants/routes';
 import { ScreenWidths } from '../../constants/screen-width';
 import CloseButton from '../Button/close-button';
+import { MainRoutes } from '../../constants/routes';
 
 interface BurgerMenuProps {
   closeMenu: () => void,
@@ -51,7 +52,10 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({ closeMenu, isOpened }) => {
         </div>
         <div className="burger-menu__links">
           {routeLinks.map((link) => {
-            const activeClassName = (link.route === location.pathname)
+            const { pathname } = location;
+            const isActive = (pathname === link.route)
+              || ((pathname === '' || pathname === '/') && link.route === MainRoutes.Jogs);
+            const activeClassName = isActive
               ? 'burger-menu__link_active'
               : '';
 
