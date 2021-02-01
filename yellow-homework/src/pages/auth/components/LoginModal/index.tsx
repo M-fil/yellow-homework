@@ -32,7 +32,7 @@ const LoginModal: React.FC = () => {
       .finally(() => {
         globalContext.setIsLoading(false);
       });
-  }, [globalContext]);
+  }, [globalContext, addToast]);
 
   return (
     <div className="login-modal">
