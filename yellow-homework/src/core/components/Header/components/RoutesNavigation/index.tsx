@@ -12,6 +12,7 @@ import BurgerButton from '../BurgerButton';
 import BurgerMenu from '../../../BurgerMenu';
 import { GlobalContext } from '../../../../context/global';
 import * as JogService from '../../../../services/jogs';
+import { MainRoutes } from '../../../../constants/routes';
 
 interface RoutesNavigationProps {
   setIsFilterBlockVisible: Dispatch<SetStateAction<boolean>>,
@@ -23,11 +24,16 @@ const RoutesNavigation: React.FC<RoutesNavigationProps> = ({
   const [t] = useTranslation();
   const location = useLocation();
   const [isBurgerMenuOpened, setIsBurgerMenuOpened] = useState<boolean>(false);
-  const { filterValues } = useContext(GlobalContext);
-  const isFiltersApplied = useMemo(() => filterValues.from !== '', [filterValues.from]);
+  const globalContext = useContext(GlobalContext);
+  const isFiltersApplied = useMemo(() => {
+    const { from, to } = globalContext.filterValues;
+
+    return from !== '' || to !== '';
+  }, [globalContext.filterValues]);
 
   const onOpenFilterBlock = useCallback(() => {
     setIsFilterBlockVisible((prevValue) => {
+      const { filterValues } = globalContext;
       JogService.setFilterValues({
         isOpened: !prevValue,
         fromDate: filterValues.from,
@@ -36,7 +42,7 @@ const RoutesNavigation: React.FC<RoutesNavigationProps> = ({
 
       return !prevValue;
     });
-  }, [filterValues, setIsFilterBlockVisible]);
+  }, [globalContext.filterValues, setIsFilterBlockVisible]);
 
   const onOpenBurgerMenu = useCallback(() => {
     setIsBurgerMenuOpened(true);
@@ -55,7 +61,9 @@ const RoutesNavigation: React.FC<RoutesNavigationProps> = ({
       <MediaQuery minDeviceWidth={ScreenWidths.TabletWidth}>
         <div className="routes-navigation__list">
           {routeLinks.map((link) => {
-            const isActive = location.pathname === link.route;
+            const { pathname } = location;
+            const isActive = (pathname === link.route)
+              || ((pathname === '' || pathname === '/') && link.route === MainRoutes.Jogs);
             const activeClassName = isActive
               ? 'routes-navigation__list-item_active'
               : '';
