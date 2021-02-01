@@ -17,13 +17,12 @@ $container-background-color: #eaeaea;
   background-color: $container-background-color;
   box-sizing: border-box;
 
-  &_opened {
-    display: flex;
+  @include media-mobile {
+    height: fit-content;
   }
 
-  @include media-tablet {
-    justify-content: center;
-    height: auto;
+  &_opened {
+    display: flex;
   }
 
   &__wrapper {
@@ -33,11 +32,13 @@ $container-background-color: #eaeaea;
 
     width: 100%;
 
-    @include media-tablet {
-      flex-direction: column;
-      align-items: flex-end;
+    @include media-mobile {
+      justify-content: space-evenly;
+    }
 
-      width: fit-content;
+    @include media-mobile-small {
+      flex-direction: column;
+      justify-content: center;
     }
   }
 
@@ -45,16 +46,36 @@ $container-background-color: #eaeaea;
     &:not(:last-child) {
       margin-right: 45px;
 
-      @include media-tablet {
+      @include media-mobile {
+        margin-right: 15px;
+      }
+
+      @include media-mobile-small {
         margin-right: 0;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
       }
     }
 
-    .input-field {
+    @include media-mobile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    & .input-field {
       width: auto;
       height: 30px;
       text-align: center;
+    }
+
+    & .label__text {
+      @include media-mobile {
+        width: 100%;
+        text-align: left;
+        margin-right: 0;
+        margin-bottom: 5px;
+      }
     }
   }
 }

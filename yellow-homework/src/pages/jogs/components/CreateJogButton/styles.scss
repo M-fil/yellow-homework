@@ -1,5 +1,6 @@
 $button-size: 60px;
 $default-side-indent: 40px;
+$default-background-color: #ffffff;
 
 .create-jog-btn {
   cursor: pointer;
@@ -15,6 +16,7 @@ $default-side-indent: 40px;
   border: none;
   outline: none;
   background: none;
+  background: $default-background-color;
 
   border-radius: 50%;
   width: $button-size;
