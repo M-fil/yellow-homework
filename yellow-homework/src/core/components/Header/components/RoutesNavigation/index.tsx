@@ -1,14 +1,17 @@
 import './styles.scss';
-import React, { useCallback, useState, SetStateAction, Dispatch } from 'react';
+import React, { useCallback, useState, SetStateAction, Dispatch, useContext, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import MediaQuery from 'react-responsive'
 
 import { ScreenWidths } from '../../../../constants/screen-width';
 import FilterIcon from '../../../../../assets/images/header/filter-icon.svg';
+import SelectedFilterIcon from '../../../../../assets/images/header/filter-icon-selected.svg';
 import { routeLinks } from '../../constants/routes';
 import BurgerButton from '../BurgerButton';
 import BurgerMenu from '../../../BurgerMenu';
+import { GlobalContext } from '../../../../context/global';
+import * as JogService from '../../../../services/jogs';
 
 interface RoutesNavigationProps {
   setIsFilterBlockVisible: Dispatch<SetStateAction<boolean>>,
@@ -20,10 +23,20 @@ const RoutesNavigation: React.FC<RoutesNavigationProps> = ({
   const [t] = useTranslation();
   const location = useLocation();
   const [isBurgerMenuOpened, setIsBurgerMenuOpened] = useState<boolean>(false);
+  const { filterValues } = useContext(GlobalContext);
+  const isFiltersApplied = useMemo(() => filterValues.from !== '', [filterValues.from]);
 
   const onOpenFilterBlock = useCallback(() => {
-    setIsFilterBlockVisible((prevValue) => !prevValue);
-  }, []);
+    setIsFilterBlockVisible((prevValue) => {
+      JogService.setFilterValues({
+        isOpened: !prevValue,
+        fromDate: filterValues.from,
+        toDate: filterValues.to,
+      });
+
+      return !prevValue;
+    });
+  }, [filterValues, setIsFilterBlockVisible]);
 
   const onOpenBurgerMenu = useCallback(() => {
     setIsBurgerMenuOpened(true);
@@ -65,7 +78,7 @@ const RoutesNavigation: React.FC<RoutesNavigationProps> = ({
         className="filter-button"
       >
         <img
-          src={FilterIcon}
+          src={isFiltersApplied ? SelectedFilterIcon : FilterIcon}
           alt="filter-icon"
           className="filter-button__icon"
         />

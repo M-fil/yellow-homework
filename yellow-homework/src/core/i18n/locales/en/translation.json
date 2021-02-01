@@ -25,5 +25,11 @@
   },
   "auth": {
     "login-button-text": "Let me in"
+  },
+  "messages": {
+    "create-jog-success": "The new jog was successfully created!"
+  },
+  "errors": {
+    "empty-create-jos-values": "All values should be filled in."
   }
 }

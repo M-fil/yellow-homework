@@ -1,44 +1,66 @@
 import './styles.scss';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useContext } from 'react';
 
 import NoItemsBlock from './components/NoItemsBlock';
 import * as JogService from '../../core/services/jogs';
-import * as AuthService from '../../core/services/auth';
 import Loader from '../../core/components/Loader';
 import JogItem from './components/JogItem';
 import CreateJogModal from './components/CreateJogModal';
+import CreateJogButton from './components/CreateJogButton';
+import { GlobalContext } from '../../core/context/global';
+import { filterByDatesInRange, formatDate } from '../../core/utils/date';
 
-const JogsPage: React.FC = () => {
-  const token = AuthService.getSavedToken();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
-  const [jogs, setJogs] = useState<JogService.JogEntity[]>([]);
+const currentDate = formatDate(new Date(Date.now()), true, '-');
+
+interface JogsPageProps {
+  jogs: JogService.JogEntity[],
+  isJogsLoading: boolean,
+}
+
+const JogsPage: React.FC<JogsPageProps> = ({ jogs, isJogsLoading }) => {
+  const [isCreateJogModalOpened, setIsCreateJogModalOpened] = useState<boolean>(false);
+  const [jogsToShow, setJogsToShow] = useState<JogService.JogEntity[]>([]);
+  const globalContext = useContext(GlobalContext);
 
   useEffect(() => {
-    setIsLoading(true);
+    if (jogs.length > 0) {
+      setJogsToShow(jogs);
+    }
+  }, [jogs]);
 
-    JogService.getAllJogs(token)
-      .then((data) => {
-        console.log('data', data);
-        setJogs(data?.jogs || []);
-      })
-      .catch((error: Error) => {
-        setErrorMessage(error.message);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      })
+  useEffect(() => {
+    if (!isJogsLoading) {
+      const { from, to } = globalContext.filterValues;
+      const filteredJogs = filterByDatesInRange<JogService.JogEntity>(
+        from, to || currentDate, jogs,
+      );
+      setJogsToShow(filteredJogs);
+    }
+  }, [globalContext.filterValues, isJogsLoading, jogs]);
+
+  const onOpenCreateJogModal = useCallback(() => {
+    setIsCreateJogModalOpened(true);
+  }, []);
+
+  const onCloseCreateJogModal = useCallback(() => {
+    setIsCreateJogModalOpened(false);
   }, []);
 
   return (
     <div className="jogging-page">
-      <CreateJogModal />
-      {isLoading && <Loader />}
-      {(jogs.length === 0 && !isLoading) ? (
-        <NoItemsBlock />
-      ): (
+      <CreateJogButton
+        onClick={onOpenCreateJogModal}
+      />
+      <CreateJogModal
+        isOpened={isCreateJogModalOpened}
+        closeModal={onCloseCreateJogModal}
+      />
+      {isJogsLoading && <Loader />}
+      {(jogsToShow.length === 0 && !isJogsLoading) ? (
+        <NoItemsBlock openCreateJogModal={onOpenCreateJogModal} />
+      ) : (
         <div className="jogging-page__items">
-          {jogs.map((jog) => {
+          {jogsToShow.map((jog) => {
             return (
               <JogItem
                 key={jog.id}

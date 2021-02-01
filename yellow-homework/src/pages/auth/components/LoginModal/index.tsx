@@ -1,6 +1,7 @@
 import './styles.scss';
 import React, { useCallback, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useToasts } from 'react-toast-notifications';
 
 import BigBearImage from '../../../../assets/images/main/big-bear.png';
 import DefaultButton from '../../../../core/components/Button';
@@ -10,6 +11,7 @@ import { GlobalContext } from '../../../../core/context/global';
 const LoginModal: React.FC = () => {
   const [t] = useTranslation();
   const globalContext = useContext(GlobalContext);
+  const { addToast } = useToasts();
 
   const onLoginClickHandler = useCallback(() => {
     globalContext.setIsLoading(true);
@@ -22,7 +24,7 @@ const LoginModal: React.FC = () => {
         globalContext.setIsAuthenticated(!!(data && data.token));
       })
       .catch((error: Error) => {
-        console.log(error);
+        addToast(error.message, { appearance: 'error', autoDismiss: true });
       })
       .finally(() => {
         globalContext.setIsLoading(false);

@@ -5,12 +5,16 @@ import { useTranslation } from 'react-i18next';
 import NoItemsImage from '../../../../assets/images/main/no-items.svg';
 import DefaultButton from '../../../../core/components/Button';
 
-const NoItemsBlock: React.FC = () => {
+interface NoItemsBlockProps {
+  openCreateJogModal: () => void,
+}
+
+const NoItemsBlock: React.FC<NoItemsBlockProps> = ({ openCreateJogModal }) => {
   const [t] = useTranslation();
 
   const onCreateJogHandler = useCallback(() => {
-    console.log('');
-  }, []);
+    openCreateJogModal();
+  }, [openCreateJogModal]);
 
   return (
     <div className="no-items-block">
